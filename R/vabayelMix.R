@@ -1,5 +1,5 @@
 "vabayelMix" <-
-function(data, prior, Ncat, nruns=100, npick=1, MaxIt=500, conv.tol=0.001, nCVconv=10, verbatim=TRUE){
+function(data, prior=NA, Ncat, nruns=100, npick=1, MaxIt=500, conv.tol=0.001, nCVconv=10, verbatim=TRUE){
 
 if( is.na(Ncat) ){
   stop("Must specify =maximum number of categories/clusters to look for.");
@@ -143,7 +143,7 @@ for ( i in 1:npick){
 }
 
 
- return(list(estvals=EstVals,wcl=wCl,probs=MembPr2, costs=v.Costs, conv=v.NC));
+ return(list(estvals=EstVals,wcl=wCl,probs=MembPr2, costs=v.Costs[sv.Costs$ix], conv=v.NC[sv.Costs$ix]));
 
 
 } ### END OF FUNCTION

@@ -11,36 +11,38 @@
   distribution. Current version implements a gaussian mixture model where
   the covariances matrices are diagonal.}
 
-\synopsis{
-vabayelMix(data, prior, Ncat, nruns=100, npick=1, MaxIt=500,
+\usage{
+vabayelMix(data, prior=NA, Ncat, nruns=100, npick=1, MaxIt=500,
 conv.tol=0.001, nCVconv=10, verbatim=TRUE)
 }
 
 \arguments{
   \item{data}{A matrix of dimension Ns x Ndim containing the data to be clustered. Algorithm clusters rows of matrix and treats columns as dimensions.}
   \item{prior}{A list of various elements containing prior
-    information. List elements are \code{prior$mean}, \code{prior$ivarm}, \code{prior$ivara},
+    information as obtained for example by using \code{UseBasicPrior}. List elements are \code{prior$mean}, \code{prior$ivarm}, \code{prior$ivara},
     \code{prior$ivarb} and \code{prior$dapi}. The first four are matrices of dimension Ncat
   x Ndim, \code{prior$dapi} is a vector of length Ncat. \code{prior$mean} contains the
   means of the cluster mean gaussian priors. \code{prior$ivarm}
 contains the inverse variances for the cluster mean gaussian priors. \code{prior$ivara} and
 \code{prior$ivarb} contain the parameters for the gamma prior distribution of
 the inverse variances of the clusters. \code{prior$dapi} is a weight vector
-specifying prior knowledge about the number of clusters.}
+specifying prior knowledge about the number of clusters. If \code{prior}
+is unspecified a complete uninformative prior is implemented that assumes
+rows to be mean normalised to zero.}
   \item{Ncat}{The maximum number of clusters or categories to look for
     in the data set. Algorithm switches off clusters it doesn't
-    need. See Details.}
+    need. See References.}
   \item{nruns}{Number of ensemble learning optimisation runs to be
     performed. Each optimisation run uses a different (random) starting
     point.}
   \item{npick}{The npick runs (out of nruns) that best optimise the cost
-    function. See Details.}
+    function. See References.}
   \item{MaxIt}{Maximum number of iterations to be performed for a single
     optimisation run.}
   \item{conv.tol}{Threshold tolerance level for establishing
     convergence of iterations.}
-  \item{nCV}{Number of consecutive iterations to consider in
-    establishing convergence of the run at level conv.tol.}
+  \item{nCVconv}{Number of consecutive iterations to consider in
+    establishing convergence of the run at level \code{conv.tol}.}
   \item{verbatim}{Logical. If true prints out estimates and cost
     function value per iteration.}
 }
@@ -99,7 +101,10 @@ for( s in (Nspg+1):NsTot){
   data[s,deg.idx] <- rnorm(1,2,0.25);
 }
 types.idx <- c(rep(1,50),rep(2,50));
-vbmix <- vabayelMix(data, prior=NA, Ncat=4, nruns=10, npick=2, MaxIt=500, conv.tol=0.001, nCVconv=10);
+useprior.l <- UseBasicPrior(data,rep(1,4));
+vbmix <- vabayelMix(data, prior=NA, Ncat=4, nruns=10, npick=2,MaxIt=500, conv.tol=0.001, nCVconv=10);
+# or could use
+# vbmix <- vabayelMix(data, prior=useprior.l, Ncat=4, nruns=10, npick=2,MaxIt=500, conv.tol=0.001, nCVconv=10);
 plot(1:NsTot,vbmix$wcl[1,],type="h",col=types.idx);
 }
 
