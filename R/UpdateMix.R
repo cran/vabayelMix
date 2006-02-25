@@ -41,3 +41,4 @@ function(Ncat,data,m0,am0,aiv0,biv0,api0,m,am,aiv,biv,lambda,s.lambda){
   return(list(mean = m, ivarm = am, ivarb = biv, ivara= aiv, dapi=api));
 
 } # END of function
+

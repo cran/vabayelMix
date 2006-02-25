@@ -20,7 +20,7 @@ UseBasicPrior(data, weights.v)
  \code{weights.v} is a vector of length \code{Ncat}, the maximum number
  of clusters to look for. 
 }
-\value{A list with following components. The first four are matrices of dimension \code{Ncat} x \code{Ndim}, \code{dapi} is a vector of length \code{Ncat}.
+\value{  A list with following components. The first four are matrices of dimension \code{Ncat} x \code{Ndim}, \code{dapi} is a vector of length \code{Ncat}.
   \item{mean}{the means of the cluster mean gaussian priors.}
   \item{varm}{the inverse variances for the cluster mean gaussian priors.}
   \item{ivara}{parameters for the gamma prior distribution of the inverse variances of the clusters. See references.}

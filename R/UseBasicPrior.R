@@ -36,3 +36,4 @@ useprior.l <- list(mean=m0, ivarm=am0, ivara=aiv0, ivarb=biv0, dapi=api0);
 return(useprior.l);
 
 } # END OF FUNCTION
+

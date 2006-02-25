@@ -1,5 +1,5 @@
 "vabayelMix" <-
-function(data, prior=NA, Ncat, nruns=100, npick=1, MaxIt=500, conv.tol=0.001, nCVconv=10, verbatim=TRUE){
+function(data, prior=NA, Ncat, nruns=100, npick=1, MaxIt=500, conv.tol=0.001, nCVconv=10, verbatim=FALSE){
 
 if( is.na(Ncat) ){
   stop("Must specify =maximum number of categories/clusters to look for.");
@@ -88,15 +88,17 @@ print("About to enter iterations");
 t <- 0; inc <-1 ;
 Cost.old <- rep(10^6,times=nCVconv);
 while( (t < MaxIt) && (inc==1)){
- print(c("Iteration",t)); 
-
+  if(verbatim){
+  print(c("Iteration",t)); 
  # Update Categorical weights for updating posterior parameters
   print("Calling UpdateCatw");
+  }
   Catw <- UpdateCatw(Ncat,data,m,am,aiv,biv,api);
  # Update posterior parameters 
+  if(verbatim){
   print("Calling UpdateMix");
+  }
   NewVals <- UpdateMix(Ncat,data,m0,am0,aiv0,biv0,api0,m,am,aiv,biv,Catw$cwm,Catw$scw);
-
   if( verbatim==TRUE){
   print("Means");
   print(NewVals$mean);
@@ -142,8 +144,8 @@ for ( i in 1:npick){
   wCl[i,] <- MembPr2[[i]]$wcl ;
 }
 
-
  return(list(estvals=EstVals,wcl=wCl,probs=MembPr2, costs=v.Costs[sv.Costs$ix], conv=v.NC[sv.Costs$ix]));
 
 
 } ### END OF FUNCTION
+

@@ -19,3 +19,4 @@ function(Ncat,data,m0,am0,aiv0,biv0,api0,m,am,aiv,biv,api,Catwm){
 
 
 }
+

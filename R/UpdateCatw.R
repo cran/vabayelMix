@@ -42,3 +42,4 @@ function(Ncat,data,m,am,aiv,biv,api){
 
 
 } # endoffunction
+

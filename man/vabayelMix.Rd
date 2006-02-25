@@ -11,9 +11,9 @@
   distribution. Current version implements a gaussian mixture model where
   the covariances matrices are diagonal.}
 
-\usage{
+\synopsis{
 vabayelMix(data, prior=NA, Ncat, nruns=100, npick=1, MaxIt=500,
-conv.tol=0.001, nCVconv=10, verbatim=TRUE)
+conv.tol=0.001, nCVconv=10, verbatim=FALSE)
 }
 
 \arguments{
@@ -41,7 +41,7 @@ rows to be mean normalised to zero.}
     optimisation run.}
   \item{conv.tol}{Threshold tolerance level for establishing
     convergence of iterations.}
-  \item{nCVconv}{Number of consecutive iterations to consider in
+  \item{nCV}{Number of consecutive iterations to consider in
     establishing convergence of the run at level \code{conv.tol}.}
   \item{verbatim}{Logical. If true prints out estimates and cost
     function value per iteration.}
